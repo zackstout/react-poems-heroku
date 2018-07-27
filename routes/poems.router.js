@@ -14,7 +14,7 @@ if (process.env.DATABASE_URL) {
     config = {
         host: params.hostname,
         port: params.port,
-        user: '',
+        user: 'root',
         password: '',
         database: params.pathname.split('/')[1],
         ssl: true, // heroku requires ssl to be true
