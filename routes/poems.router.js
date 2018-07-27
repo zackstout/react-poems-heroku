@@ -13,6 +13,7 @@ if (process.env.DATABASE_URL) {
     config = {
         host: params.hostname,
         port: params.port,
+        user: params.user,
         database: params.pathname.split('/')[1],
         ssl: true, // heroku requires ssl to be true
         max: 10, // max number of clients in the pool
