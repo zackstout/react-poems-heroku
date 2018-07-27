@@ -75,7 +75,7 @@ router.get('/random', function (req, res) {
             // Just multiplying by 3 to try to avoid blanks:
             for (let i = 0; i < RANDOM_LENGTH * 3; i++) {
                 // It's so many I won't even worry about possibility of duplicates for now:
-                random_indices.push(Math.floor(Math.random() * 422920));
+                random_indices.push(Math.floor(Math.random() * 8000));
             }
 
             let resultRows = [];
