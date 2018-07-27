@@ -9,11 +9,12 @@ if (process.env.DATABASE_URL) {
     // Heroku gives a url, not a connection object
     // https://github.com/brianc/node-pg-pool
     var params = url.parse(process.env.DATABASE_URL);
+    console.log('PARAMS ARE :', params);
 
     config = {
         host: params.hostname,
         port: params.port,
-        user: params.user,
+        // user: params.user,
         database: params.pathname.split('/')[1],
         ssl: true, // heroku requires ssl to be true
         max: 10, // max number of clients in the pool
