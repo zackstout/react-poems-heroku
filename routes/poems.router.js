@@ -2,11 +2,21 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('pg');
+var dotenv = require('dotenv');
 
 var url = require('url');
 let config;
+console.log("DBURL IS....", process.env.DATABASE_URL);
 
-if (process.env.DATABASE_URL) {
+if (process.env.DATABASE_URL == undefined) {
+    config = {
+        host: process.env.DATABASE_SERVER || 'localhost', // Server hosting the postgres database
+        port: process.env.DATABASE_PORT || 5432, //env var: PGPORT
+        database: process.env.DATABASE_NAME || 'poems_react', //env var: PGDATABASE
+        max: 10, // max number of clients in the pool
+        idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
+    };
+} else {
     // Heroku gives a url, not a connection object
     // https://github.com/brianc/node-pg-pool
     var params = url.parse(process.env.DATABASE_URL);
@@ -24,17 +34,6 @@ if (process.env.DATABASE_URL) {
         max: 10, // max number of clients in the pool
         idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
     };
-
-    // For local development environment:
-} else {
-    config = {
-        host: process.env.DATABASE_SERVER || 'localhost', // Server hosting the postgres database
-        port: process.env.DATABASE_PORT || 5432, //env var: PGPORT
-        database: process.env.DATABASE_NAME || 'poems_react', //env var: PGDATABASE
-        max: 10, // max number of clients in the pool
-        idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
-    };
-
 }
 
 const RANDOM_LENGTH = 10;
@@ -81,7 +80,7 @@ router.get('/random', function (req, res) {
             // Just multiplying by 3 to try to avoid blanks:
             for (let i = 0; i < RANDOM_LENGTH * 3; i++) {
                 // It's so many I won't even worry about possibility of duplicates for now:
-                random_indices.push(Math.floor(Math.random() * 8000));
+                random_indices.push(Math.floor(Math.random() * 6000));
             }
 
             let resultRows = [];
