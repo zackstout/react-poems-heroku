@@ -8,6 +8,7 @@ var url = require('url');
 let config;
 console.log("DBURL IS....", process.env.DATABASE_URL);
 
+
 if (process.env.DATABASE_URL == undefined) {
     config = {
         host: process.env.DATABASE_SERVER || 'localhost', // Server hosting the postgres database
