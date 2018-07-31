@@ -1,4 +1,10 @@
+# Heroku-React-Postgres
+Deploying a React/Postgres app with Heroku.
 
+## Personal Notes
 The key was to run the 3001 server in another terminal. Then everything works. You can then execute `npm run client`.
 
-OOOOH the problem could just be that we're exceeding the allowed amount of rows in a database..... That could definitely be it. It's good we learned how to split up the server and client, and more about npm scripts though.
+## Deployment Notes
+- Was exceeding allowed amount of rows by Heroku (10,000).
+- Needed this in our `pg` config: `var auth = params.auth.split(':');`.
+- Also needed to change client-side `start` script back to `react-scripts-start`, from `react-scripts build && node ../server.js`.
